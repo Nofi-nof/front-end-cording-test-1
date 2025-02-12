@@ -6,6 +6,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 export default defineConfig({
   test: {
     environment: "jsdom",
+    setupFiles: "./app/setUpTests.ts",
   },
   plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
 });
