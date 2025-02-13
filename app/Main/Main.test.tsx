@@ -1,4 +1,4 @@
-import { Main } from "./main";
+import { Main } from ".";
 import { expect, test } from "vitest";
 import { render, screen } from "@testing-library/react";
 
