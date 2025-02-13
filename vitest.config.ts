@@ -7,6 +7,7 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     setupFiles: "./app/setUpTests.ts",
+    globals: true,
   },
   plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
 });
