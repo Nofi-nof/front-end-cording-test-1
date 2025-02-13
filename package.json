@@ -8,7 +8,9 @@
     "dev": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc",
-    "test": "vitest --watch false"
+    "test": "vitest --watch false",
+    "predeploy": "pnpm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@react-router/node": "^7.1.5",
@@ -31,6 +33,7 @@
     "@types/react-dom": "^19.0.1",
     "eslint": "^9.20.1",
     "eslint-plugin-react": "^7.37.4",
+    "gh-pages": "^6.3.0",
     "globals": "^15.14.0",
     "prettier": "3.5.0",
     "react-router-devtools": "^1.1.0",
