@@ -1,6 +1,6 @@
-import { Main } from ".";
 import { expect, test } from "vitest";
 import { render, screen } from "@testing-library/react";
+import { Main } from "./main";
 
 test("「Hello」の文字が表示されるか", () => {
   render(<Main />);
