@@ -22,6 +22,7 @@ jobs:
       - name: Build
         run: pnpm build
 
+      # gh-pagesを使ってbuildファイルをdeploy
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
