@@ -9,5 +9,9 @@ export default defineConfig({
     setupFiles: "./app/setUpTests.ts",
     globals: true,
   },
-  plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
+  plugins: [
+    !process.env.VITEST && reactRouter(),
+    tsconfigPaths(),
+    tailwindcss(),
+  ],
 });
