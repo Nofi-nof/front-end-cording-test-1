@@ -10,8 +10,5 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  <BrowserRouter basename="/front-end-cording-test-1">
-    <Main />
-  </BrowserRouter>;
-  return;
+  return <Main />;
 }
