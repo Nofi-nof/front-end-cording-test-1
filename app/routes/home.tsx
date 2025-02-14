@@ -1,3 +1,4 @@
+import { BrowserRouter } from "react-router";
 import type { Route } from "./+types/home";
 import { Main } from "./main/main";
 
@@ -9,5 +10,8 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  return <Main />;
+  <BrowserRouter basename="/front-end-cording-test-1">
+    <Main />
+  </BrowserRouter>;
+  return;
 }
