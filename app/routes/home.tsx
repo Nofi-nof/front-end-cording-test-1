@@ -139,7 +139,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
   );
 }
 
-//県のコードを渡して、APIから人口データを受け取る
+//人口APIからデータを取得する
 const fetchPopulationApiBySelectedPrefCode = async (pref: Prefecture) => {
   const response = await fetch(
     `https://yumemi-frontend-engineer-codecheck-api.vercel.app/api/v1/population/composition/perYear?prefCode=${pref.prefCode}`,
@@ -159,8 +159,8 @@ const fetchPopulationApiBySelectedPrefCode = async (pref: Prefecture) => {
   return transformData(data, pref);
 };
 
+//prefCodeを渡して、人口APIから県ごとのデータを取得する
 const usePopulationQueries = (selectedPref: Prefecture[]) => {
-  //このdataとprefCodeを紐付けてオブジェクトにしたい
   const results = useQueries({
     queries: selectedPref.map((pref) => ({
       queryKey: ["fetchPopulationApiBySelectedPrefCode", pref.prefCode],
@@ -171,10 +171,10 @@ const usePopulationQueries = (selectedPref: Prefecture[]) => {
   return results;
 };
 
+//人口APIから取得したデータを{県名:人口}のオブジェクトに変換する
 const transformData = (apiData: PopulationResponse, pref: Prefecture) => {
   const transformed = apiData.result.data[0].data.map(({ year, value }) => {
     const transformed: PopulationChartData = { year };
-    // prefecturesのprefcode=ここのprefcodeのとき、prefectures.prefNameをtransformed[prefName] = population;
     transformed[pref.prefName] = value;
 
     return transformed;
