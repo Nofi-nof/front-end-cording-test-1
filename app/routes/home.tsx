@@ -1,7 +1,11 @@
 import { PureComponent, useState, type Key } from "react";
 import type { Route } from "./+types/home";
 import { Main } from "./main/main";
-import { useQueries, useQuery } from "@tanstack/react-query";
+import {
+  useQueries,
+  useQuery,
+  type UseQueryResult,
+} from "@tanstack/react-query";
 import {
   LineChart,
   Line,
@@ -77,7 +81,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
   const [selectedPrefCode, setSelectedPrefCode] = useState<Prefecture[]>([]);
   const handleCheckboxChange = (pref: Prefecture) => {
     setSelectedPrefCode((prev) =>
-      prev.includes(pref)
+      prev.find((p) => p.prefCode === pref.prefCode)
         ? prev.filter((item) => item.prefCode !== pref.prefCode)
         : [...prev, pref],
     );
@@ -102,39 +106,41 @@ export default function Home({ loaderData }: Route.ComponentProps) {
           </li>
         ))}
       </ul>
-      {queries.map((query) => (
-        <ul key={query.data?.pref.prefCode}>
-          <li>
-            <div style={{ width: "100%", height: 300 }}>
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart
-                  width={500}
-                  height={300}
-                  data={query.data?.result}
-                  margin={{
-                    top: 5,
-                    right: 30,
-                    left: 20,
-                    bottom: 5,
-                  }}
-                >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="year" />
-                  <YAxis dataKey={query.data?.pref.prefName} />
-                  <Tooltip />
-                  <Legend />
+      <ul>
+        <li>
+          <div style={{ width: "100%", height: 300 }}>
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart
+                width={500}
+                height={300}
+                data={transformResult(queries)}
+                margin={{
+                  top: 5,
+                  right: 30,
+                  left: 20,
+                  bottom: 5,
+                }}
+              >
+                {/* Y軸の数字が最初に作ったグラフの上限以上に広がらない */}
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="year" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                {queries.map((query) => (
                   <Line
+                    key={query.data?.pref.prefCode}
                     type="monotone"
                     dataKey={query.data?.pref.prefName}
                     stroke="#8884d8"
                     activeDot={{ r: 8 }}
                   />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
-          </li>
-        </ul>
-      ))}
+                ))}
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </li>
+      </ul>
     </>
   );
 }
@@ -153,8 +159,6 @@ const fetchPopulationApiBySelectedPrefCode = async (pref: Prefecture) => {
   if (!response.ok) throw new Error("Failed to fetch PopulationAPI");
 
   const data = (await response.json()) as PopulationResponse;
-
-  console.log(transformData(data, pref));
 
   return transformData(data, pref);
 };
@@ -184,4 +188,38 @@ const transformData = (apiData: PopulationResponse, pref: Prefecture) => {
     pref,
     result: transformed,
   };
+};
+
+// 選択した県の{県名:人口}のオブジェクトに変換したデータを配列に入れる
+const transformResult = (
+  queries: UseQueryResult<
+    {
+      pref: Prefecture;
+      result: PopulationChartData[];
+    },
+    unknown
+  >[],
+) => {
+  const result: PopulationChartData[] = [];
+
+  for (const query of queries) {
+    if (query.data?.result)
+      for (const data of query.data?.result) {
+        const index = result.findIndex((r) => r.year === data.year);
+        if (index !== -1) {
+          result[index] = {
+            ...result[index],
+            [query.data?.pref.prefName!]: data[query.data?.pref.prefName!],
+          };
+          continue;
+        }
+
+        result.push({
+          year: data.year,
+          [query.data?.pref.prefName!]: data[query.data?.pref.prefName!],
+        });
+      }
+  }
+
+  return result;
 };
