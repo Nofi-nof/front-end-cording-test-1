@@ -1,6 +1,5 @@
 import { PureComponent, useState, type Key } from "react";
 import type { Route } from "./+types/home";
-import { Main } from "./main/main";
 import {
   useQueries,
   useQuery,
@@ -140,7 +139,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 
   return (
     <>
-      <Main />
+      <h1>47都道府県人口変遷グラフ</h1>
       <ul>
         {loaderData.map((pref) => (
           <li key={pref.prefCode}>
