@@ -49,9 +49,9 @@ export default function DisplayPrefectures({
   };
 
   return (
-    <>
+    <div className="grid grid-cols-1 justify-items-center gap-10 p-10 ">
       <h1>47都道府県人口変遷グラフ</h1>
-      <ul>
+      <ul className="grid grid-cols-9 gap-5">
         {loaderData.map((pref) => (
           <li key={pref.prefCode}>
             <label>
@@ -60,7 +60,6 @@ export default function DisplayPrefectures({
                 value={pref.prefCode}
                 onChange={() => handleCheckboxChange(pref)}
               />
-              {pref.prefCode}
               {pref.prefName}
             </label>
           </li>
@@ -69,6 +68,6 @@ export default function DisplayPrefectures({
       <DisplayPopulationGraph
         selectedPrefCode={selectedPrefCode}
       ></DisplayPopulationGraph>
-    </>
+    </div>
   );
 }

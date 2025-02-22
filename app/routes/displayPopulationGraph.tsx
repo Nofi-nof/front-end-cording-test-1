@@ -22,42 +22,36 @@ export function DisplayPopulationGraph({ selectedPrefCode }: Props) {
   const queries = usePopulationQueries(selectedPrefCode);
 
   return (
-    <ul>
-      <li>
-        <div style={{ width: "90%", height: 300 }}>
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart
-              width={500}
-              height={300}
-              data={transformPopulationResult(queries)}
-              margin={{
-                top: 5,
-                right: 30,
-                left: 20,
-                bottom: 5,
-              }}
-            >
-              <CartesianGrid stroke="none" strokeDasharray="3 3" />
-              <XAxis dataKey="year" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              {queries.map((query) => (
-                <Line
-                  key={query.data?.pref.prefCode}
-                  type="monotone"
-                  dataKey={query.data?.pref.prefName}
-                  // 県の番号がundefinedになったときは0番目の色になる
-                  stroke={
-                    colors[query.data?.pref.prefCode || 0 % colors.length]
-                  }
-                  activeDot={{ r: 8 }}
-                />
-              ))}
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
-      </li>
-    </ul>
+    <div className="w-5/6 h-80 pl-5">
+      <ResponsiveContainer width="100%" height="100%">
+        <LineChart
+          width={500}
+          height={300}
+          data={transformPopulationResult(queries)}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid stroke="none" strokeDasharray="3 3" />
+          <XAxis dataKey="year" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          {queries.map((query) => (
+            <Line
+              key={query.data?.pref.prefCode}
+              type="monotone"
+              dataKey={query.data?.pref.prefName}
+              // 県の番号がundefinedになったときは0番目の色になる
+              stroke={colors[query.data?.pref.prefCode || 0 % colors.length]}
+              activeDot={{ r: 8 }}
+            />
+          ))}
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
   );
 }
