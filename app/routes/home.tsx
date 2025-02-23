@@ -4,6 +4,7 @@ import { apiKey } from "~/constants/apiKey";
 import { useState } from "react";
 import type { Prefecture } from "~/types/Prefecture";
 import { DisplayPopulationGraph } from "./displayPopulationGraph";
+import { populationCategories } from "~/constants/population-categories";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -65,6 +66,14 @@ export default function DisplayPrefectures({
           </li>
         ))}
       </ul>
+      <select className="w-72">
+        <option value="">人口カテゴリーを選択してください</option>
+        {populationCategories.slice(0, 4).map((populationCategory, index) => (
+          <option className="w-6" key={index} value={populationCategory}>
+            {populationCategory}
+          </option>
+        ))}
+      </select>
       <DisplayPopulationGraph
         selectedPrefCode={selectedPrefCode}
       ></DisplayPopulationGraph>
