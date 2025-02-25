@@ -39,6 +39,7 @@ export default function DisplayPrefectures({
   loaderData,
 }: Route.ComponentProps) {
   const [selectedPrefCode, setSelectedPrefCode] = useState<Prefecture[]>([]);
+  const [selectedKey, setSelectedKey] = useState(0);
 
   //チェックボックスの選択を配列にする
   const handleCheckboxChange = (pref: Prefecture) => {
@@ -66,16 +67,20 @@ export default function DisplayPrefectures({
           </li>
         ))}
       </ul>
-      <select className="w-72">
+      <select
+        className="w-72"
+        onChange={(e) => setSelectedKey(parseInt(e.target.value, 10))}
+      >
         <option value="">人口カテゴリーを選択してください</option>
         {populationCategories.slice(0, 4).map((populationCategory, index) => (
-          <option className="w-6" key={index} value={populationCategory}>
+          <option className="w-6" key={index} value={index}>
             {populationCategory}
           </option>
         ))}
       </select>
       <DisplayPopulationGraph
         selectedPrefCode={selectedPrefCode}
+        selectedKey={selectedKey}
       ></DisplayPopulationGraph>
     </div>
   );

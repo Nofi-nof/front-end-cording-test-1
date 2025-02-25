@@ -15,9 +15,13 @@ import type { Prefecture } from "~/types/Prefecture";
 
 type Props = {
   selectedPrefCode: Prefecture[];
+  selectedKey: number;
 };
 
-export function DisplayPopulationGraph({ selectedPrefCode }: Props) {
+export function DisplayPopulationGraph({
+  selectedPrefCode,
+  selectedKey,
+}: Props) {
   // 選択された県の人口データ
   const queries = usePopulationQueries(selectedPrefCode);
 
@@ -27,7 +31,7 @@ export function DisplayPopulationGraph({ selectedPrefCode }: Props) {
         <LineChart
           width={500}
           height={300}
-          data={transformPopulationResult(queries)}
+          data={transformPopulationResult(queries, selectedKey)}
           margin={{
             top: 5,
             right: 30,
