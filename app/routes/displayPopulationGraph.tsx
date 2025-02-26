@@ -26,7 +26,7 @@ export function DisplayPopulationGraph({
   const queries = usePopulationQueries(selectedPrefCode);
 
   return (
-    <div className="w-5/6 h-80 pl-5">
+    <div className="w-5/6 h-80 md:pl-5">
       <ResponsiveContainer width="100%" height="100%">
         <LineChart
           width={500}
