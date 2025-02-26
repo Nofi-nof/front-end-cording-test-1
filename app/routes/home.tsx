@@ -51,7 +51,7 @@ export default function DisplayPrefectures({
   };
 
   return (
-    <div className="grid grid-cols-1 justify-items-center gap-10 p-10">
+    <div className="grid grid-cols-1 justify-items-center gap-10 py-10 md:p-10">
       <h1>47都道府県人口変遷グラフ</h1>
       <ul className="grid grid-cols-3 gap-5 md:grid-cols-9">
         {loaderData.map((pref) => (
