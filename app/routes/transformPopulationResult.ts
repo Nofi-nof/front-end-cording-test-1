@@ -2,11 +2,7 @@ import type { UseQueryResult } from "@tanstack/react-query";
 import type { PopulationChartData } from "~/types/PopulationChartData";
 import type { Prefecture } from "~/types/Prefecture";
 
-//引数を選択された県と選択された人口カテゴリーのデータにしたい
-// selectedPrefecture: (Prefecture | undefined)[],
-// selectedQueries: (PopulationChartData[] | undefined)[],
-
-// 選択した県の{県名:人口}のオブジェクトに変換したデータを配列に入れる
+//選択した県の変換後{県名:人口}データを配列に入れる
 export const transformPopulationResult = (
   queries: UseQueryResult<
     {
