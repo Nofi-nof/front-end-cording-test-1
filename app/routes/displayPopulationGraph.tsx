@@ -24,7 +24,6 @@ export function DisplayPopulationGraph({
 }: Props) {
   // 選択された県の人口データ
   const queries = usePopulationQueries(selectedPrefCode);
-  console.log(JSON.stringify(queries));
 
   return (
     <div className="w-5/6 h-80 md:pl-5">
