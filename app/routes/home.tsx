@@ -3,7 +3,7 @@ import type { PrefecturesResponse } from "~/types/PrefecturesResponse";
 import { apiKey } from "~/constants/apiKey";
 import { useState } from "react";
 import type { Prefecture } from "~/types/Prefecture";
-import { DisplayPopulationGraph } from "./displayPopulationGraph";
+import { DisplayPopulationGraph } from "./DisplayPopulationGraph";
 import { populationCategories } from "~/constants/population-categories";
 
 export function meta({}: Route.MetaArgs) {
