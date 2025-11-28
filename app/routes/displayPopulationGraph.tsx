@@ -8,10 +8,10 @@ import {
   Legend,
   Line,
 } from "recharts";
-import { colors } from "~/constants/prefColors";
-import { transformPopulationResult } from "./transformPopulationResult";
-import { usePopulationQueries } from "./usePopulationQueries";
-import type { Prefecture } from "~/types/Prefecture";
+import { colors } from "../../src/constants/prefColors";
+import { transformPopulationResult } from "../../src/features/transformPopulationResult";
+import { usePopulationQueries } from "../../src/features/usePopulationQueries";
+import type { Prefecture } from "../../src/types/Prefecture";
 
 type Props = {
   selectedPrefCode: Prefecture[];
