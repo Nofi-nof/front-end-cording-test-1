@@ -45,11 +45,11 @@ export const transformPopulationData = (
 
   return {
     pref,
-    result: [
+    result: {
       totalPopulation,
       youngPopulation,
       workingAgePopulation,
       elderlyPopulation,
-    ],
+    },
   };
 };
