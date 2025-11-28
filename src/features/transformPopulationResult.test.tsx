@@ -1,4 +1,4 @@
-import { transformPopulationResult } from "./transformPopulationResult";
+import { transformPopulationResult } from "../../features/transformPopulationResult";
 
 const testQueries = [
   {
