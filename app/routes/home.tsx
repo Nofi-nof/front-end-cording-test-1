@@ -16,7 +16,7 @@ export function meta() {
 // 県APIから県名と県コードを取得する
 export async function clientLoader() {
   const prefecturesUrl =
-    "https://yumemi-frontend-engineer-codecheck-api.vercel.app/api/v1/prefectures";
+    "https://frontend-engineer-codecheck-api.mirai.yumemi.io/api/v1/prefectures";
 
   const response = await fetch(prefecturesUrl, {
     method: "GET",
@@ -78,11 +78,13 @@ export default function DisplayPrefectures({
           </option>
         ))}
       </select>
-      if(){}
-      <DisplayPopulationGraph
-        selectedPrefCode={selectedPrefCode}
-        selectedKey={selectedKey}
-      ></DisplayPopulationGraph>
+      if(selectedPrefCode)
+      {
+        <DisplayPopulationGraph
+          selectedPrefCode={selectedPrefCode}
+          selectedKey={selectedKey}
+        ></DisplayPopulationGraph>
+      }
     </div>
   );
 }
