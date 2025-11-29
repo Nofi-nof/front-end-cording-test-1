@@ -8,7 +8,7 @@ export const fetchPopulationApiBySelectedPrefCode = async (
   pref: Prefecture,
 ) => {
   const response = await fetch(
-    `https://yumemi-frontend-engineer-codecheck-api.vercel.app/api/v1/population/composition/perYear?prefCode=${pref.prefCode}`,
+    `https://frontend-engineer-codecheck-api.mirai.yumemi.io/api/v1/population/composition/perYear?prefCode=${pref.prefCode}`,
     {
       method: "GET",
       headers: {

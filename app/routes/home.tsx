@@ -3,10 +3,10 @@ import type { PrefecturesResponse } from "~/types/PrefecturesResponse";
 import { apiKey } from "~/constants/apiKey";
 import { useState } from "react";
 import type { Prefecture } from "~/types/Prefecture";
-import { DisplayPopulationGraph } from "./DisplayPopulationGraph";
-import { populationCategories } from "~/constants/population-categories";
+import { DisplayPopulationGraph } from "./displayPopulationGraph";
+import { populationCategories } from "~/constants/populationCategories";
 
-export function meta({}: Route.MetaArgs) {
+export function meta() {
   return [
     { title: "New React Router App" },
     { name: "description", content: "Welcome to React Router!" },
@@ -16,7 +16,7 @@ export function meta({}: Route.MetaArgs) {
 // 県APIから県名と県コードを取得する
 export async function clientLoader() {
   const prefecturesUrl =
-    "https://yumemi-frontend-engineer-codecheck-api.vercel.app/api/v1/prefectures";
+    "https://frontend-engineer-codecheck-api.mirai.yumemi.io/api/v1/prefectures";
 
   const response = await fetch(prefecturesUrl, {
     method: "GET",
@@ -78,10 +78,13 @@ export default function DisplayPrefectures({
           </option>
         ))}
       </select>
-      <DisplayPopulationGraph
-        selectedPrefCode={selectedPrefCode}
-        selectedKey={selectedKey}
-      ></DisplayPopulationGraph>
+      if(selectedPrefCode)
+      {
+        <DisplayPopulationGraph
+          selectedPrefCode={selectedPrefCode}
+          selectedKey={selectedKey}
+        ></DisplayPopulationGraph>
+      }
     </div>
   );
 }

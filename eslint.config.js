@@ -21,6 +21,7 @@ export default [
           case: "camelCase",
         },
       ],
+      "react/react-in-jsx-scope": "off",
     },
   },
 ];
