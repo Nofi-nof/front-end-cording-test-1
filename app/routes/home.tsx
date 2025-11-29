@@ -3,10 +3,10 @@ import type { PrefecturesResponse } from "~/types/PrefecturesResponse";
 import { apiKey } from "~/constants/apiKey";
 import { useState } from "react";
 import type { Prefecture } from "~/types/Prefecture";
-import { DisplayPopulationGraph } from "./DisplayPopulationGraph";
-import { populationCategories } from "~/constants/population-categories";
+import { DisplayPopulationGraph } from "./displayPopulationGraph";
+import { populationCategories } from "~/constants/populationCategories";
 
-export function meta({}: Route.MetaArgs) {
+export function meta() {
   return [
     { title: "New React Router App" },
     { name: "description", content: "Welcome to React Router!" },
@@ -78,6 +78,7 @@ export default function DisplayPrefectures({
           </option>
         ))}
       </select>
+      if(){}
       <DisplayPopulationGraph
         selectedPrefCode={selectedPrefCode}
         selectedKey={selectedKey}
